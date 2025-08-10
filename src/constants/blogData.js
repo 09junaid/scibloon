@@ -35,16 +35,10 @@ export const blogs=[
     id:5,
     title:"Lorem ipsum dolor sit amet consectetur adipisicing elite.",
     description:"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam omnis odio voluptas illum possimus assumenda dignissimos ex rem, fugit quod, consequuntur alias voluptatibus adipisci sint odit maiores? Praesentium, itaque exercitationem?",
-    image:blog5,
-  },
-  {
-    id:6,
-    title:"Lorem ipsum dolor sit amet consectetur adipisicing elite.",
-    description:"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam omnis odio voluptas illum possimus assumenda dignissimos ex rem, fugit quod, consequuntur alias voluptatibus adipisci sint odit maiores? Praesentium, itaque exercitationem?",
     image:blog6,
   },
   {
-    id:7,
+    id:6,
     title:"Lorem ipsum dolor sit amet consectetur adipisicing elite.",
     description:"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam omnis odio voluptas illum possimus assumenda dignissimos ex rem, fugit quod, consequuntur alias voluptatibus adipisci sint odit maiores? Praesentium, itaque exercitationem?",
     image:blog7,

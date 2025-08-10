@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { link } from "../../../types/data";
 import { Menu, X } from "lucide-react";
+import DarkMode from "../ui/DarkMode/DarkMode";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -42,6 +43,7 @@ export default function Navbar() {
             Logout
           </button>
         </div>
+          <DarkMode/>
 
         {/* Mobile Menu Button */}
         <button

@@ -2,6 +2,7 @@ import { DM_Sans, Lora, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
+import { ThemeProvider } from "../../context/ThemeContext";
 
 const dmSans = DM_Sans({
   variable: "--font-sans", // Matches your global CSS variable
@@ -32,9 +33,11 @@ export default function RootLayout({ children }) {
       <body
         className={`${dmSans.variable} ${lora.variable} ${ibmPlexMono.variable} antialiased`}
       >
+        <ThemeProvider>
         <Navbar />
         {children}
         <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
