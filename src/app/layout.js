@@ -1,14 +1,24 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { DM_Sans, Lora, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/navbar/Navbar";
+import Footer from "@/components/footer/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const dmSans = DM_Sans({
+  variable: "--font-sans", // Matches your global CSS variable
   subsets: ["latin"],
+  weight: ["400", "500", "700"], // Optional weights
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const lora = Lora({
+  variable: "--font-serif", // Matches your global CSS variable
   subsets: ["latin"],
+  weight: ["400", "500", "700"], // Optional weights
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  variable: "--font-mono", // Matches your global CSS variable
+  subsets: ["latin"],
+  weight: ["400", "500", "700"], // Optional weights
 });
 
 export const metadata = {
@@ -20,9 +30,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${dmSans.variable} ${lora.variable} ${ibmPlexMono.variable} antialiased`}
       >
+        <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
