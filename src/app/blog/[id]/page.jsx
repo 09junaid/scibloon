@@ -10,10 +10,10 @@ export default function BlogPostPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* Text Content */}
         <div className="flex flex-col gap-2">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-snug">
+          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4 leading-snug">
             Lorem ipsum dolor sit amet consectetur adipisicing elite.
           </h1>
-          <p className="text-lg text-gray-600 leading-relaxed mb-4 text-justify">
+          <p className="text-lg text-muted-foreground leading-relaxed mb-4 text-justify">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam
             omnis odio voluptas illum possimus assumenda dignissimos ex rem,
             fugit quod, consequuntur alias voluptatibus adipisci sint odit
@@ -21,15 +21,15 @@ export default function BlogPostPage() {
           </p>
           <div className="flex items-center gap-4">
             <Image
-              classNmae="w-10 h-10 rounded-full"
+              className="w-10 h-10 rounded-full"
               src={avatar}
               alt="Jese Leos"
               width={40}
               height={40}
             />
-            <div className="font-medium dark:text-white">
+            <div className="font-medium text-foreground">
               <div>Junaid</div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">
+              <div className="text-sm text-muted-foreground">
                 Joined in {date}
               </div>
             </div>
@@ -49,7 +49,7 @@ export default function BlogPostPage() {
       </div>
 
       {/* Main Blog Content */}
-      <article className="mt-10 text-gray-700 leading-relaxed space-y-4 ">
+      <article className="mt-10 text-foreground leading-relaxed space-y-4 ">
         <p>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Soluta
           obcaecati repellat in vel nobis dolore, blanditiis magnam ut
