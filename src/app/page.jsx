@@ -8,7 +8,7 @@ export default function Home() {
       {/* Text Content */}
       <div className="flex flex-col gap-6 flex-1 text-center md:text-left">
         <h1
-          className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight bg-gradient-to-b from-green-500 to-gray-400 bg-clip-text text-transparent"
+          className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight bg-gradient-to-b from-primary/90 to-gray-400 bg-clip-text text-transparent"
         >
           Better design for your digital products
         </h1>
