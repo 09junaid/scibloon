@@ -1,10 +1,28 @@
 import React from "react";
 import Image from "next/image";
-import nestedBlog from "../../../../public/assets/images/jpg/nested-blog.jpg";
-import avatar from "../../../../public/assets/images/svgs/avatar.svg";
 import { date } from "../../../../utils/getYear";
+import { notFound } from "next/navigation";
 
-export default function BlogPostPage() {
+async function getData(id) {
+  const res = await fetch(`http://localhost:3000/api/posts/${id}`, {
+    cache: "no-cache",
+  });
+
+  if (!res.ok) {
+    return notFound();
+  }
+  return res.json();
+}
+
+export default async function BlogPostPage({ params }) {
+  const data = await getData(params.id);
+
+  // agar API ka image galat format me aaye (double URL), clean kar dete hain
+  const cleanImg =
+    data.img?.includes("https://") && data.img.split("https://").length > 2
+      ? "https://" + data.img.split("https://")[1]
+      : data.img;
+
   return (
     <article className="min-h-screen">
       {/* Hero Section */}
@@ -30,28 +48,27 @@ export default function BlogPostPage() {
             {/* Content */}
             <div className="space-y-6">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight tracking-tight">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit
+                {data.title}
               </h1>
               <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam
-                omnis odio voluptas illum possimus assumenda dignissimos ex rem,
-                fugit quod, consequuntur alias voluptatibus adipisci sint odit
-                maiores? Praesentium, itaque exercitationem?
+                {data.description}
               </p>
-              
+
               {/* Author Info */}
               <div className="flex items-center gap-4 pt-4 border-t border-border">
                 <div className="relative">
                   <Image
                     className="w-12 h-12 rounded-full ring-2 ring-primary/20"
-                    src={avatar}
-                    alt="Author avatar"
+                    src="/assets/images/svgs/avatar.svg" // agar API author image bhi bhejta hai to yahan change kar lo
+                    alt={data.author}
                     width={48}
                     height={48}
                   />
                 </div>
                 <div className="flex-1">
-                  <div className="font-semibold text-foreground">Junaid</div>
+                  <div className="font-semibold text-foreground">
+                    {data.author}
+                  </div>
                   <div className="text-sm text-muted-foreground">
                     Joined in {date}
                   </div>
@@ -62,11 +79,11 @@ export default function BlogPostPage() {
               </div>
             </div>
 
-            {/* Featured Image */}
+            {/* Featured Image (API se) */}
             <div className="relative aspect-[4/3] lg:aspect-square rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src={nestedBlog}
-                alt="Blog featured image"
+                src={cleanImg || "/assets/images/jpg/nested-blog.jpg"} // fallback if no img
+                alt={data.title}
                 fill
                 className="object-cover transition-transform duration-300 hover:scale-105"
                 priority
@@ -78,26 +95,15 @@ export default function BlogPostPage() {
         {/* Article Content */}
         <div className="prose prose-lg sm:prose-xl max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
           <p className="text-lg sm:text-xl leading-relaxed text-muted-foreground mb-8">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Soluta
-            obcaecati repellat in vel nobis dolore, blanditiis magnam ut
-            aspernatur doloribus officia deleniti veniam voluptatum quos nam
-            error, odio hic. Accusamus esse itaque cum velit nisi aperiam sunt
-            asperiores modi magni nulla earum autem odit nobis corrupti repellat
-            nam quidem, provident natus deleniti fuga exercitationem.
+            {data.content}
           </p>
-          
+
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-12 mb-6">
             Understanding the Core Concepts
           </h2>
-          
+
           <p className="text-lg sm:text-xl leading-relaxed text-muted-foreground mb-8">
-            Dolorem earum natus facilis iure, ullam blanditiis et fuga voluptas
-            dolores incidunt, pariatur nostrum nam voluptatem omnis recusandae!
-            Error dicta iste dolorum dolores suscipit quod architecto consequuntur
-            tenetur quisquam inventore est, ipsam ad sint atque iure aliquam.
-            Suscipit velit, molestias porro, qui facere quibusdam asperiores nam
-            rem consequuntur incidunt repellendus numquam veniam quisquam ea illo,
-            aspernatur beatae cumque corrupti.
+            {data.content}
           </p>
 
           <blockquote className="border-l-4 border-primary bg-muted/50 p-6 my-8 rounded-r-lg">
@@ -110,12 +116,7 @@ export default function BlogPostPage() {
           </blockquote>
 
           <p className="text-lg sm:text-xl leading-relaxed text-muted-foreground mb-8">
-            Rerum nisi magni suscipit voluptate soluta porro saepe. Unde quam,
-            soluta perspiciatis perferendis consectetur velit in ex quidem tenetur
-            voluptatibus? Quisquam non deleniti, saepe officiis asperiores odit
-            possimus vel similique eaque eligendi sapiente illo autem hic,
-            cupiditate tempora! Iusto odio voluptate quas nostrum dolores
-            reprehenderit rerum doloribus ad dignissimos.
+            {data.content}
           </p>
 
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-12 mb-6">
@@ -123,14 +124,7 @@ export default function BlogPostPage() {
           </h2>
 
           <p className="text-lg sm:text-xl leading-relaxed text-muted-foreground mb-8">
-            Velit voluptas quibusdam, numquam non maxime error, ipsa suscipit
-            sequi molestias eum, mollitia repellendus amet vitae omnis sunt
-            possimus sint? Ea dolorem maiores hic soluta provident architecto
-            iusto voluptates quod perferendis accusamus minus obcaecati vitae
-            dolore suscipit nisi, eligendi sit, vero et harum, velit temporibus
-            officiis optio? Atque illo esse praesentium ut a iste itaque soluta,
-            nesciunt debitis numquam inventore sed reiciendis beatae sapiente
-            architecto adipisci quia voluptas consectetur.
+            {data.content}
           </p>
         </div>
 
