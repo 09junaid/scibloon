@@ -66,7 +66,7 @@ export default async function BlogPage() {
                 href={`/blog/${item._id}`}
                 className="text-primary font-medium hover:underline"
               >
-                Read More →
+                Read More →→→→
               </Link>
             </div>
           </article>
