@@ -1,7 +1,16 @@
 import { portfolio } from "@/constants/images";
 import Link from "next/link";
 import React from "react";
-
+export const metadata = {
+  title: "Portfolio | Scribloon",
+  description: "Explore the latest blog posts and stories on Scribloon. Discover engaging content from our community of digital storytellers.",
+  keywords: ["blog", "blog posts", "stories", "digital storytelling", "content", "articles"],
+  openGraph: {
+    title: "Portfolio | Scribloon",
+    description: "Explore the latest blog posts and stories on Scribloon. Discover engaging content from our community of digital storytellers.",
+    type: "website",
+  },
+};
 export default function PortfolioPage() {
   return (
     <section className="max-w-6xl mx-auto flex flex-col gap-8 py-8 px-4 xl:px-2">

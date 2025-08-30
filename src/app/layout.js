@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
 import { ThemeProvider } from "../../context/ThemeContext";
+import AuthProvider from "@/components/AuthProvider/AuthProvider";
 
 const dmSans = DM_Sans({
   variable: "--font-sans",
@@ -40,6 +41,7 @@ export default function RootLayout({ children }) {
           }}
         />
         <ThemeProvider>
+          <AuthProvider>
           <a
             href="#content"
             className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded focus:shadow"
@@ -51,6 +53,7 @@ export default function RootLayout({ children }) {
               {children}
             </main>
           <Footer />
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

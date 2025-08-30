@@ -6,10 +6,12 @@ import { usePathname } from "next/navigation";
 import { link } from "../../../types/data";
 import { Menu, X } from "lucide-react";
 import DarkMode from "../ui/DarkMode/DarkMode";
+import { signOut, useSession } from "next-auth/react";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const session = useSession();
 
   const isActive = (url) => {
     if (!pathname) return false;
@@ -18,7 +20,7 @@ export default function Navbar() {
   };
 
   const handleLogout = () => {
-    console.log("logout");
+    signOut({ callbackUrl: "/" });
   };
 
   return (
@@ -51,18 +53,20 @@ export default function Navbar() {
             );
           })}
           <DarkMode />
-          <button
-            onClick={handleLogout}
-            className="px-4 py-2 bg-accent cursor-pointer rounded hover:bg-primary hover:text-white transition-colors"
-          >
-            Logout
-          </button>
+          {session.status === "authenticated" && (
+            <button
+              onClick={handleLogout}
+              className="px-4 py-2 bg-accent cursor-pointer rounded hover:bg-primary hover:text-white transition-colors"
+            >
+              Logout
+            </button>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="lg:hidden p-2 rounded hover:bg-muted transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="lg:hidden p-2 rounded hover:bg-muted transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer"
           aria-label="Toggle menu"
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
@@ -73,7 +77,10 @@ export default function Navbar() {
 
       {/* Mobile Dropdown */}
       {menuOpen && (
-        <div id="mobile-menu" className="lg:hidden border-t border-border bg-background">
+        <div
+          id="mobile-menu"
+          className="lg:hidden border-t border-border bg-background"
+        >
           <div className="flex flex-col gap-4 p-4">
             {link.map((linkItem) => {
               const active = isActive(linkItem.url);
@@ -92,15 +99,17 @@ export default function Navbar() {
               );
             })}
             <DarkMode />
-            <button
-              onClick={() => {
-                handleLogout();
-                setMenuOpen(false);
-              }}
-              className="px-4 py-2 bg-accent cursor-pointer rounded hover:bg-primary hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            >
-              Logout
-            </button>
+            {session.status === "authenticated" && (
+              <button
+                onClick={() => {
+                  handleLogout();
+                  setMenuOpen(false);
+                }}
+                className="px-4 py-2 bg-accent cursor-pointer rounded hover:bg-primary hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                Logout
+              </button>
+            )}
           </div>
         </div>
       )}

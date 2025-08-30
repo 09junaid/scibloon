@@ -3,6 +3,19 @@ import Image from "next/image";
 import Button from "@/components/ui/Button/Button";
 import { CategoryItems } from "@/constants/data";
 
+export  async function generateMetadata({ params }) {
+  const categoryData = CategoryItems[params.category] || [];
+  const title = categoryData.length
+    ? `${params.category.charAt(0).toUpperCase() + params.category.slice(1)} | Scribloon`
+    : "Category Not Found | Scribloon";
+  const description = categoryData.length
+    ? categoryData[0].desc
+    : "Category description not found";
+  return {
+    title,
+    description,
+  };
+}
 export default function CategoryPage({ params }) {
   const categoryData = CategoryItems[params.category] || [];
 

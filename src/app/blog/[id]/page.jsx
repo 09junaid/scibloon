@@ -14,6 +14,19 @@ async function getData(id) {
   return res.json();
 }
 
+export  async function generateMetadata({ params }) {
+  const data = await getData(params.id);
+  if (!data) {
+    return notFound();
+  }
+  const title = `${data.title} | Scribloon`;
+  const description = `Read "${data.title}" by ${data.author} on Scribloon. ${data.description}`;
+  return {
+    title,
+    description,
+  };
+}
+
 export default async function BlogPostPage({ params }) {
   const data = await getData(params.id);
 
