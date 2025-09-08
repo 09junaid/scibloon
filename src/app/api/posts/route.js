@@ -3,13 +3,15 @@ import { connectDB } from "../../../../utils/db";
 import { Post } from "@/models";
 
 export const GET = async (request) => {
+  const url=new URL(request.url);
+  const username=url.searchParams.get("username");
   try {
     console.log("Attempting to connect to database...");
     await connectDB();
     console.log("Database connected successfully");
     
     console.log("Fetching posts from database...");
-    const posts = await Post.find();
+    const posts = await Post.find(username && {username});
     console.log(`Found ${posts.length} posts:`, posts);
     
     return NextResponse.json(posts, { status: 200 });

@@ -1,5 +1,7 @@
 "use client";
+import { Trash } from "lucide-react";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import useSWR from "swr";
@@ -31,9 +33,10 @@ export default function DashboardPage() {
   const router = useRouter();
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data, error, isLoading } = useSWR(
-    "https://jsonplaceholder.typicode.com/posts",
+    `api/posts?username=${session?.data?.user?.name}`,
     fetcher
   );
+  console.log(data);
   if (session.status === "loading") {
     return <p>Loading...</p>;
   }
@@ -42,8 +45,27 @@ export default function DashboardPage() {
   }
 
   return (
-    <>
-      <h1>Dashboard</h1>
-    </>
+    <div>
+      <div>
+        {data?.map((item)=>(
+
+        <div key={item.id}>
+      <div>
+        <Image src={item.img} alt=""/>
+      </div>
+      <h2>{item.title}</h2>
+      <span><Trash /></span>
+        </div>
+        ))}
+      </div>
+      <form>
+        <h1>Add New</h1>
+        <input type="text" placeholder="Title"/>
+        <input type="text" placeholder="Description"/>
+        <input type="text" placeholder="Image" />
+        <textarea placeholder="Content"></textarea>
+        <button>Send</button>
+      </form>
+    </div>
   );
 }
