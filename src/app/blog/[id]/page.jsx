@@ -107,17 +107,10 @@ export default async function BlogPostPage({ params }) {
 
         {/* Article Content */}
         <div className="prose prose-lg sm:prose-xl max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
-          <p className="text-lg sm:text-xl leading-relaxed text-muted-foreground mb-8">
+          {/* Content */}
+          <div className="text-lg sm:text-xl leading-relaxed text-muted-foreground mb-8 whitespace-pre-wrap">
             {data.content}
-          </p>
-
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-12 mb-6">
-            Understanding the Core Concepts
-          </h2>
-
-          <p className="text-lg sm:text-xl leading-relaxed text-muted-foreground mb-8">
-            {data.content}
-          </p>
+          </div>
 
           <blockquote className="border-l-4 border-primary bg-muted/50 p-6 my-8 rounded-r-lg">
             <p className="text-lg sm:text-xl italic text-foreground">
@@ -127,40 +120,11 @@ export default async function BlogPostPage({ params }) {
               — Alan Kay
             </cite>
           </blockquote>
-
-          <p className="text-lg sm:text-xl leading-relaxed text-muted-foreground mb-8">
-            {data.content}
-          </p>
-
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-12 mb-6">
-            Practical Applications
-          </h2>
-
-          <p className="text-lg sm:text-xl leading-relaxed text-muted-foreground mb-8">
-            {data.content}
-          </p>
         </div>
 
         {/* Article Footer */}
         <footer className="mt-16 pt-8 border-t border-border">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-muted-foreground">Share:</span>
-              <div className="flex gap-2">
-                <button className="p-2 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-colors">
-                  <span className="sr-only">Share on Twitter</span>
-                  🐦
-                </button>
-                <button className="p-2 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-colors">
-                  <span className="sr-only">Share on LinkedIn</span>
-                  💼
-                </button>
-                <button className="p-2 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-colors">
-                  <span className="sr-only">Share on Facebook</span>
-                  📘
-                </button>
-              </div>
-            </div>
             <a
               href="/blog"
               className="inline-flex items-center gap-2 text-primary hover:underline transition-colors"

@@ -57,9 +57,6 @@ export default async function BlogPage() {
             <div className="flex-1 flex flex-col gap-4">
               <h2 className="text-2xl font-semibold text-wrap">{item.title}</h2>
               <p className="text-muted-foreground text-justify">
-                {item.content}
-              </p>
-              <p className="text-muted-foreground text-justify">
                 {item.description}
               </p>
               <Link

@@ -107,3 +107,43 @@ export const PUT = async (request) => {
     );
   }
 }
+
+export const DELETE = async (request) => {
+  try {
+    console.log("Attempting to connect to database for DELETE...");
+    await connectDB();
+    console.log("Database connected successfully for DELETE");
+    
+    const url = new URL(request.url);
+    const postId = url.pathname.split('/').pop();
+    
+    if (!postId) {
+      return NextResponse.json(
+        { error: "Post ID is required" },
+        { status: 400 }
+      );
+    }
+    
+    console.log("Deleting post with ID:", postId);
+    const deletedPost = await Post.findByIdAndDelete(postId);
+    
+    if (!deletedPost) {
+      return NextResponse.json(
+        { error: "Post not found" },
+        { status: 404 }
+      );
+    }
+    
+    console.log("Post deleted successfully:", deletedPost);
+    return NextResponse.json(
+      { message: "Post deleted successfully", deletedPost },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("DELETE API Error Details:", error);
+    return NextResponse.json(
+      { error: "Failed to delete post", details: error.message },
+      { status: 500 }
+    );
+  }
+}
