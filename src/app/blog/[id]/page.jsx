@@ -4,7 +4,7 @@ import { date } from "../../../../utils/getYear";
 import { notFound } from "next/navigation";
 
 async function getData(id) {
-  const res = await fetch(`http://localhost:3000/api/posts/${id}`, {
+  const res = await fetch(`https://scibloon.vercel.app/api/posts/${id}`, {
     cache: "no-cache",
   });
 
